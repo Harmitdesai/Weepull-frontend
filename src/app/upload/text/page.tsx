@@ -85,7 +85,6 @@ const Text = () => {
                 sentiment: "Neutral",
                 basicEmotion: new Set([]),
                 extendedEmotion: new Set([]),
-                // valenceBasedEmotion: new Set([]),
                 complexEmotion: new Set([]),
                 tags: [],
                 metadata: "",
@@ -169,7 +168,7 @@ const Text = () => {
         e.target.style.height = `${e.target.scrollHeight}px`;
     }
 
-    ////////////For OnBoarding purpose//////////
+    ////////////For OnBoarding purpose (New people will get onboarded to their connectd accounts)//////////
 
     const [onBoarded, setOnBoarded] = useState<boolean|null>(null);
 
@@ -212,9 +211,10 @@ const Text = () => {
             [name]: value
         }));
     };
+
+    ///////////Rendering component based on selected data type/////////////
     function renderComponent(value: string) {
-        
-        
+           
         switch (value) {
 
             case "Question-Answer":
@@ -674,8 +674,8 @@ const Text = () => {
 
     if (onBoarded === null) return <p className="text-white">Loading...</p>;
 
-    // return onBoarded ? (
-    return true ? (
+    return onBoarded ? (
+    // return true ? (
         <>
         <div className="mt-5 p-5 h-full">
             <Select onValueChange={handleValueChange}>

@@ -35,7 +35,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <SessionProvider>
           {!shouldHideNav && <Nav />}
-          {children}
+          <main className="relative z-10">{children}</main>
         </SessionProvider>
       </body>
     </html>

@@ -43,9 +43,9 @@ export interface BaseTextData {
     language: string;
     text: string;
     sentiment: "Positive" | "Negative" | "Neutral";
-    basicEmotion: Set< "Hapiness" | "Sadness" | "Anger" | "Fear" | "Disgust" | "Surprise" | "Neutral" >;
+    basicEmotion: Set< "Happiness" | "Sadness" | "Anger" | "Fear" | "Disgust" | "Surprise" | "Neutral" >;
     complexEmotion: Set< "Optimism" | "Pessimism" | "Trust" | "Anticipation" | "Satisfaction" | "Boredom" >;
-    extendedEmotion: Set< "Joy" | "Excitemnet" | "Love" | "Gratitude" | "Confusion" | "Embarrassment" | "Guilt" | "Pride" | "Shame" >;
+    extendedEmotion: Set< "Joy" | "Excitement" | "Love" | "Gratitude" | "Confusion" | "Embarrassment" | "Guilt" | "Pride" | "Shame" >;
     // valenceBasedEmotion: Set< "Positive" | "Negative" | "Neutral" >;
   }
   

@@ -9,16 +9,13 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DialogClose
   } from "@/components/ui/dialog";
 
 import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
+    CardFooter,
   } from "@/components/ui/card";
 
 import {Post} from "@/types/textData";
@@ -33,28 +30,29 @@ export default function DashboardPost({ post }: Props) {
   return (
         <Dialog key={post.postId}>
             <DialogTrigger asChild>
-                <Card className="h-[250px]">
+                <Card className="h-[250px] bg-fancy relative transform transition-transform duration-300 will-change-transform hover:scale-105 hover:z-10">
                     <CardHeader>
-                        <CardTitle className="flex-[0_0_60%] text-3xl font-bold line-clamp-3">
+                        <CardTitle className="flex-[0_0_60%] text-3xl text-gray-300 font-bold line-clamp-3 ">
                         {post.title}
                         </CardTitle>
-                        <CardDescription className="flex-[0_0_40%] text-gray-600 text-xl">
-                        {post.type}
-                        </CardDescription>
                     </CardHeader>
+                    <CardFooter className="absolute bottom-0 left-0 text-gray-500 text-xl">
+                    {post.type}
+                    </CardFooter>
                 </Card>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
+
+            <DialogContent className="sm:max-w-[425px] bg-white/10 backdrop-blur-md rounded-xl p-8 shadow-md border-t-[1px] border-l-[0px] border-b-[0px] border-r-[0px] border-white/30 text-white space-y-4">
+                <DialogHeader className="bg-white/30 rounded-xl shadow-md border-t-[1px] border-white/40 p-6">
                     <DialogTitle>
                         {post.title ?? "No Title"}
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-gray-200">
                         {post.type}
                     </DialogDescription>
                 </DialogHeader>
-                <span><span className="text-black font-bold text-lr">Description</span> : {post.description}</span>
-                <span><span className="text-black font-bold text-lr">Example</span> : {post.example}</span>
+                <span className="bg-white/20 rounded-xl shadow-md border-t-[1px] border-white/30 p-6"><span className="text-white font-bold text-lr">Description</span> : {post.description}</span>
+                <span className="bg-white/10 rounded-xl shadow-md border-t-[1px] border-white/20 p-6"><span className="text-white font-bold text-lr">Example</span> : {post.example}</span>
                 {/* <span>Total &nbsp;&nbsp; &nbsp;&nbsp;datapoints are yet to fetched from this post.</span> */}
                 <span>People might have provided datapoints click on purchase to see further</span>
                 <DialogFooter>

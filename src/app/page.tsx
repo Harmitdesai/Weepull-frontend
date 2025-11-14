@@ -30,8 +30,8 @@ import {
 
 import {Post} from "@/types/textData";
 import DashboardPost from "./_components/DashboardPost";
-import { useDashboardHooks } from "./_hooks/useDashboardHooks";
-  
+import { RetrievedPost } from "./_hooks/useDashboardHooks";
+import { useCallback } from "react";
 
 const Dashboard = () => {
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
     ///////////Variable for storing type of the post being added/////////
     const [type, setType] = useState("Text - Text");
 
-    const retrievedPost = async () => {
+    const retrievedPost = useCallback(async () => {
 
         const email = session?.user?.email;
         const url = "http://localhost:8080/dataFetch/userpost";
@@ -54,7 +54,7 @@ const Dashboard = () => {
         const parsedResponse = await response.json();
         const data = parsedResponse.data;
     
-        const postList: Post[] = data.map((post: any) => ({
+        const postList: Post[] = data.map((post: RetrievedPost) => ({
           title: post.title,
           type: post.type,
           description: post.description,
@@ -64,13 +64,13 @@ const Dashboard = () => {
     
         setPosts(postList);
         console.log(postList);
-    };
+    }, [session]);
 
     useEffect(() => {
         if (status === 'authenticated'){
           retrievedPost();
         }
-    },[status, session]);
+    },[status, retrievedPost]);
 
     if (status === 'loading') {
       return <p className="text-white">Loading...</p>;
@@ -81,44 +81,11 @@ const Dashboard = () => {
       redirect('/auth/login');
     }
 
-    ///////////Data Fetching function////////////
-
-    const fetchData = async (postId: number, total: number, name: string) => {
-        const url = "http://localhost:8080/dataFetch/postdata";
-        const response = await fetch(url, {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json',
-            },
-            body : JSON.stringify({postId: postId, total: total})
-        })
-
-        const parsedResponse = await response.json();
-        console.log(parsedResponse);
-
-        const dataarr = []
-        
-        for (const item in parsedResponse.data){
-            dataarr.push(parsedResponse.data[item].data);
-        }
-
-        const file_name = name.replace(/\s+/g, '_').toLowerCase();
-        const blob = new Blob([JSON.stringify(dataarr)], { type: "application/json" });
-        const urlnew = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = urlnew;
-        a.download = file_name;
-        a.click();
-
-        URL.revokeObjectURL(url);
-    }
-
   return (
     <div>
          <div className="mt-5 p-5 h-full">
             <div className="grid grid-cols-5 gap-4 h-[500px]">
-            {posts.map((post, index) => (
+            {posts.map((post) => (
                 <DashboardPost key={post.postId} post={post}>
                 </DashboardPost>
             ))}
@@ -127,7 +94,7 @@ const Dashboard = () => {
 
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="fixed bottom-5 left-1/2 transform -translate-x-1/2 w-32 bg-blue-500 hover:bg-blue-900">Add Post</Button>
+                <Button className="fixed bottom-5 left-1/2 bg-blue-600 hover:bg-blue-500 transform transition-transform duration-300 will-change-transform hover:scale-105 rounded-xl shadow-md border-t-[1px] border-white/30 p-6 px-10">Add Post</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>

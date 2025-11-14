@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 // import AppleProvider from "next-auth/providers/apple";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const handler = NextAuth({
+const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -86,7 +86,8 @@ export const handler = NextAuth({
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id;
+        session.user = session.user || {}; 
+        // session.user.id = token.id;
         session.user.email = token.email;
       }
       return session;
@@ -95,3 +96,91 @@ export const handler = NextAuth({
 });
 
 export { handler as GET, handler as POST };
+
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// import NextAuth from "next-auth";
+// import GoogleProvider from "next-auth/providers/google";
+// import CredentialsProvider from "next-auth/providers/credentials";
+// import type { NextAuthOptions } from "next-auth";
+
+// const authOptions: NextAuthOptions = {
+//   providers: [
+//     GoogleProvider({
+//       clientId: process.env.GOOGLE_CLIENT_ID!,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+//     }),
+//     CredentialsProvider({
+//       name: "Credentials",
+//       credentials: {
+//         email: { label: "Email", type: "email" },
+//         password: { label: "Password", type: "password" },
+//       },
+//       async authorize(credentials) {
+//         if (!credentials?.email) return null;
+//         return { id: "1", name: credentials.email, email: credentials.email };
+//       },
+//     }),
+//   ],
+//   pages: {
+//     signIn: "/auth/login",
+//     signOut: "/auth/logout",
+//     error: "/auth/error",
+//   },
+//   session: {
+//     strategy: "jwt",
+//   },
+//   callbacks: {
+//     async signIn({ user }: { user: any }) {
+//       try {
+//         const res = await fetch("http://localhost:8080/users/verifyUser", {
+//           method: "POST",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify({ email: user.email }),
+//         });
+//         const data = await res.json();
+
+//         if (data.success) {
+//           return true;
+//         } else {
+//           const newUser = await fetch("http://localhost:8080/users/saveUser", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//               name: user.name,
+//               email: user.email,
+//               password: null,
+//             }),
+//           });
+
+//           const newUserData = await newUser.json();
+//           return Boolean(newUserData.success);
+//         }
+//       } catch (error) {
+//         console.error("Error in signIn:", error);
+//         return false;
+//       }
+//     },
+
+//     async jwt({ token, user }: { token: any; user?: any }) {
+//       if (user) {
+//         token.id = user.id;
+//         token.email = user.email;
+//       }
+//       return token;
+//     },
+
+//     async session({ session, token }: { session: any; token: any }) {
+//       if (token) {
+//         // make sure session.user exists before assigning
+//         if (!session.user) session.user = {};
+//         session.user.id = token.id;
+//         session.user.email = token.email ?? session.user.email;
+//       }
+//       return session;
+//     },
+//   },
+// };
+
+// const handler = NextAuth(authOptions);
+// export { handler as GET, handler as POST };

@@ -33,7 +33,7 @@ import type {
   FreeText,
 } from "@/types/textData";
 
-import { onboarding } from "@/stripe/onboarding";
+import { useOnboarding } from "@/stripe/onboarding";
 
 export default function TextUploadPage() {
   const router = useRouter();
@@ -44,7 +44,6 @@ export default function TextUploadPage() {
   // central hook that manages selected type, textData, tags, onboarding, submit
   const {
     selectedDataType,
-    setSelectedDataType,
     textData,
     setFormData, // for components that return a whole typed object
     updateTextData, // shallow merge update
@@ -54,14 +53,11 @@ export default function TextUploadPage() {
     addTag,
     removeTag,
     handleValueChange,
-    // onBoarded,
-    // fetchLink,
     checkOnBoarded,
-    generateLink,
     submitData,
   } = useTextData();
 
-  const { handleOnboard, onBoarded, fetchLink, link } = onboarding();
+  const { handleOnboard, onBoarded, fetchLink, link } = useOnboarding();
 
   // Redirect to login if unauthenticated (client-side)
   useEffect(() => {
@@ -76,7 +72,7 @@ export default function TextUploadPage() {
     const email = session?.user?.email;
     if (!email) return;
     handleOnboard(email);
-  }, [status, session?.user?.email, checkOnBoarded]);
+  }, [status, session?.user?.email, checkOnBoarded, handleOnboard]);
 
   // show a quick loading state while auth or onboarding check is in progress
   if (status === "loading") return <p>Loading...</p>;
@@ -160,27 +156,6 @@ export default function TextUploadPage() {
     } catch (err) {
       console.error("submitData error:", err);
       alert("An error occurred while submitting data. See console for details.");
-    }
-  };
-
-  const handleGenerateLink = async () => {
-    try {
-      const email = session?.user?.email;
-      if (!email) {
-        alert("Missing email for onboarding");
-        return;
-      }
-      const parsed = await generateLink(email);
-      // Expect parsed to contain { url }
-      if (parsed?.url) {
-        window.location.href = parsed.url;
-      } else {
-        console.error("generateLink returned unexpected:", parsed);
-        alert("Failed to get onboarding link. Check console for details.");
-      }
-    } catch (err) {
-      console.error("generateLink error:", err);
-      alert("An error occurred while generating onboarding link.");
     }
   };
 

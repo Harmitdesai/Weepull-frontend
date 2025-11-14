@@ -176,8 +176,10 @@ export function useTextData() {
     const url = `${API_URL}/dataUpload/text?postId=${postId ?? "-1"}`;
 
     // Convert Sets to arrays for JSON serialization for sentiment type
+    // eslint-disable-next-line
     let payloadData: any = { ...textData };
     if (textData.type === "Sentiment And Emotion Label") {
+      // eslint-disable-next-line
       const sen = textData as any;
       payloadData = {
         ...textData,

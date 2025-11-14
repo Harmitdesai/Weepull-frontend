@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,13 +8,10 @@ import { useSession } from 'next-auth/react';
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
-  DrawerPortal,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
@@ -30,7 +26,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 export default function PurchasePanel({ post }: Props) {
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     const [num, setNum] = useState<number>(0); // number of datapoints to purchase
     const [fetchPurchaseLink , setFetchPurchaseLink] = useState(false); // to fetch the purchase link from backend
@@ -70,12 +66,12 @@ export default function PurchasePanel({ post }: Props) {
     }
 
     return (
-        <Drawer onOpenChange={(open)=>{
+        <Drawer onOpenChange={()=>{
             getAvailableDatapoints(post.postId).then(result => {
             setNumDataPoints(result);
             })}} direction="left">
             <DrawerTrigger asChild>
-                <Button>Purchase</Button>
+                <Button className="bg-blue-600 hover:bg-blue-500 transform transition-transform duration-300 will-change-transform hover:scale-105 rounded-xl shadow-md border-t-[1px] border-white/30 p-6">Purchase</Button>
             </DrawerTrigger>
             <DrawerContent className="flex flex-col h-full w-[30vw] ">             
               <DrawerHeader className="px-6 py-4">

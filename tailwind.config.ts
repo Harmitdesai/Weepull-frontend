@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { DEFAULT_CIPHERS } from "tls";
 
 export default {
     darkMode: ["class"],
@@ -15,6 +16,23 @@ export default {
 			'120': '30rem',
 		  },
   		colors: {
+
+			surface: {
+				upper : 'hsl(203, 50%, 97%)',
+				up : 'hsl(203, 0%, 92%)',
+				DEFAULT: 'hsl(203, 0%, 88%)',
+				down : 'hsl(202, 28%, 84%)',
+				downer : 'hsl(203, 20%, 82%)',
+			},
+
+			confirmButton : {
+				DEFAULT : 'hsla(145, 70%, 52%, 1.00)',
+				up : 'hsla(145, 70%, 67%, 1.00)',
+				upper : 'hsla(145, 80%, 72%, 1.00)',
+				down : 'hsla(145, 70%, 42%, 1.00)',
+				downer : 'hsla(145, 70%, 32%, 1.00)',
+			},
+
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

@@ -6,6 +6,14 @@ import {Post} from "@/types/textData";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
+export interface RetrievedPost {
+    title: string;
+    type: string;
+    description: string;
+    postid: string;
+    example: string;
+}
+
 const retrievedPost = async (email : string) : Promise<Post[]> => {
 
         if (!email) {
@@ -24,7 +32,7 @@ const retrievedPost = async (email : string) : Promise<Post[]> => {
         const parsedResponse = await response.json();
         const data = parsedResponse.data;
     
-        const postList: Post[] = data.map((post: any) => ({
+        const postList: Post[] = data.map((post: RetrievedPost) => ({
           title: post.title,
           type: post.type,
           description: post.description,
@@ -35,7 +43,7 @@ const retrievedPost = async (email : string) : Promise<Post[]> => {
         return postList;
 };
 
-export function useDashboardHooks(email: string | undefined, status: "loading" | "authenticated" | "unauthenticated", session: any) {
+export function useDashboardHooks(email: string | undefined) {
 
     const [posts, setPosts] = useState<Post[]>([]);
 
@@ -43,8 +51,7 @@ export function useDashboardHooks(email: string | undefined, status: "loading" |
         if (email) {
             retrievedPost(email).then((data) => setPosts(data));
         }
-    }, []);
+    }, [email]);
 
     return { posts };    
-
 }

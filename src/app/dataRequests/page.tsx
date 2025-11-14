@@ -6,9 +6,7 @@ import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import {
     Card,
-    CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card";
@@ -37,8 +35,7 @@ import {
   } from "@/components/ui/select"
 
 import {Post} from "@/types/textData";
-import Email from "next-auth/providers/email";
-  
+import { RetrievedPost } from "../_hooks/useDashboardHooks";
 
 const DataRequests = () => {
 
@@ -54,7 +51,7 @@ const DataRequests = () => {
         const parsedResponse = await response.json();
         const data = parsedResponse.data;
     
-        const postList: Post[] = data.map((post: any) => ({
+        const postList: Post[] = data.map((post: RetrievedPost) => ({
           title: post.title,
           type: post.type,
           description: post.description,
@@ -79,60 +76,6 @@ const DataRequests = () => {
         redirect('/auth/login');
     }
 
-    // const posts = [{
-    //     title: "Example 1",
-    //     type: "Text to Text",
-    //     description: "a",
-    //     postId: 1
-    // },{
-    //     title: "Example 2",
-    //     type: "Text to Text",
-    //     description: "b",
-    //     postId: 2
-    // },{
-    //     title: "Example 3",
-    //     type: "Text to Text",
-    //     description: "c",
-    //     postId: 3
-    // },{
-    //     title: "Example 4",
-    //     type: "Text to Text",
-    //     description: "d",
-    //     postId: 4
-    // },{
-    //     title: "Example 5",
-    //     type: "Text to Text",
-    //     description: "e",
-    //     postId: 5
-    // },{
-    //     title: "Example 6",
-    //     type: "Text to Text",
-    //     description: "f",
-    //     postId: 6
-    // },{
-    //     title: "Example 7",
-    //     type: "Text to Text",
-    //     description: "g",
-    //     postId: 7
-    // },{
-    //     title: "Example 8",
-    //     type: "Text to Text",
-    //     description: "h",
-    //     postId: 8
-    // },{
-    //     title: "Example 9",
-    //     type: "Text to Text",
-    //     description: "i",
-    //     postId: 9
-    // },{
-    //     title: "Example 10",
-    //     type: "Text to Text",
-    //     description: "j",
-    //     postId: 10
-    // }];
-
-
-
   return (
     <>
         <div className="mt-5 p-5 h-full">
@@ -141,30 +84,31 @@ const DataRequests = () => {
                 // <div key={index} className="h-full">
                 <Dialog key={index}>
                 <DialogTrigger asChild>
-                <Card className="h-[250px]">
+                <Card className="h-[250px] bg-fancy relative transform transition-transform duration-300 will-change-transform hover:scale-105 hover:z-10">
                     <CardHeader>
-                        <CardTitle className="flex-[0_0_60%] text-3xl font-bold line-clamp-3">
+                        <CardTitle className="flex-[0_0_60%] text-3xl text-gray-300 font-bold line-clamp-3">
                         {post.title}
                         </CardTitle>
-                        <CardDescription className="flex-[0_0_40%] text-gray-600 text-xl">
+                        <CardDescription className="absolute bottom-6 left-6 text-gray-500 text-xl">
                         {post.type}
                         </CardDescription>
                     </CardHeader>
                 </Card>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
+                <DialogContent className="sm:max-w-[425px] bg-white/10 backdrop-blur-md rounded-xl p-8 shadow-md border-t-[1px] border-l-[0px] border-b-[0px] border-r-[0px] border-white/30 text-white space-y-4">
+                    <DialogHeader className="bg-white/30 rounded-xl shadow-md border-t-[1px] border-white/40 p-6">
                     <DialogTitle>
                         {post.title}
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-gray-200">
                         {post.type}
                     </DialogDescription>
                     </DialogHeader>
-                    <span>{"Description : " + post.description}</span>
-                    <span>{"Example : " + post.example}</span>
+                    <span className="bg-white/20 rounded-xl shadow-md border-t-[1px] border-white/30 p-6">{"Description : " + post.description}</span>
+                    <span className="bg-white/10 rounded-xl shadow-md border-t-[1px] border-white/20 p-6">{"Example : " + post.example}</span>
                     <DialogFooter>
-                        <Button onClick={() => {
+                        <Button className="bg-blue-600 hover:bg-blue-500 transform transition-transform duration-300 will-change-transform hover:scale-105 rounded-xl shadow-md border-t-[1px] border-white/30 p-6" 
+                        onClick={() => {
                             if (post.type === "Text - Text"){
                             redirect('/upload/text?postId=' + post.postId)
                             } else {
@@ -181,7 +125,7 @@ const DataRequests = () => {
         </div>
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="fixed bottom-5 left-1/2 transform -translate-x-1/2 w-32 bg-blue-500 hover:bg-blue-900">Add Post</Button>
+                <Button className="fixed bottom-5 left-1/2 bg-blue-600 hover:bg-blue-500 transform transition-transform duration-300 will-change-transform hover:scale-105 rounded-xl shadow-md border-t-[1px] border-white/30 p-6 px-10">Add Post</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>

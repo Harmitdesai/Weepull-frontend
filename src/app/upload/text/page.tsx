@@ -35,7 +35,9 @@ import type {
 
 import { useOnboarding } from "@/stripe/onboarding";
 
-export default function TextUploadPage() {
+import { Suspense } from "react";
+
+function TextUploadPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -263,6 +265,7 @@ export default function TextUploadPage() {
         <br />
       </div>
 
+
       <Button
         className="fixed bottom-5 left-1/2 transform -translate-x-1/2 w-32 bg-blue-500 hover:bg-blue-900"
         onClick={handleSubmit}
@@ -270,5 +273,13 @@ export default function TextUploadPage() {
         Submit
       </Button>
     </>
+  );
+}
+
+export default function TextUploadPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <TextUploadPageInner />
+    </Suspense>
   );
 }

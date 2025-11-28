@@ -29,7 +29,7 @@ const LoginPage = () => {
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl shadow-black/30 p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-2">
-            <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 mb-4">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-500/25 mb-4">
               <span className="text-white font-bold text-xl">W</span>
             </div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -105,7 +105,7 @@ const LoginPage = () => {
           {/* Trust indicators */}
           <div className="flex items-center justify-center gap-4 pt-2 border-t border-white/5">
             <div className="flex items-center gap-1 text-xs text-gray-500">
-              <svg className="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
               </svg>
               <span>Secure Login</span>

@@ -96,16 +96,8 @@ const Dashboard = () => {
 
   return (
     <div className="relative">
-      {/* Page header */}
-      <div className="px-8 pt-8 pb-4">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-cyan-100 to-emerald-200 bg-clip-text text-transparent">
-          Your Posts
-        </h1>
-        <p className="text-gray-400 mt-2">Manage and track your data collection posts</p>
-      </div>
-
       {/* Posts grid */}
-      <div className="px-8 pb-24">
+      <div className="px-8 pt-8 pb-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {posts.map((post) => (
             <DashboardPost key={post.postId} post={post} />
@@ -114,7 +106,7 @@ const Dashboard = () => {
           {/* Empty state placeholder cards */}
           {posts.length === 0 && (
             <div className="col-span-full flex flex-col items-center justify-center py-20">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 flex items-center justify-center mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-400/20 flex items-center justify-center mb-6">
                 <svg className="w-10 h-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -129,7 +121,7 @@ const Dashboard = () => {
       {/* Add Post Dialog */}
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-blue-500 hover:to-purple-500 rounded-full shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-white/10 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-105">
+          <Button className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-cyan-600 hover:bg-cyan-500 rounded-full shadow-lg border border-white/10 px-8 py-6 text-base font-semibold transition-all duration-300 hover:scale-105">
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
@@ -209,7 +201,7 @@ const Dashboard = () => {
           <DialogFooter>
             <Button 
               id="upload"
-              className="bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-blue-500 hover:to-purple-500"
+              className="bg-gradient-to-r from-cyan-600 to-cyan-600 hover:from-blue-500 hover:to-purple-500"
               onClick={async () => {
                 const title = (document.getElementById("title") as HTMLInputElement).value;
                 const description = (document.getElementById("description") as HTMLInputElement).value;

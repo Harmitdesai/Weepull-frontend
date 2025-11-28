@@ -14,17 +14,17 @@ const Nav = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const navLinkStyles = "text-gray-300 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-cyan-500 after:to-emerald-500 hover:after:w-full after:transition-all after:duration-300";
+  const navLinkStyles = "text-gray-300 hover:text-white transition-colors duration-200";
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/30 border-b border-white/10 shadow-lg shadow-black/20">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10 shadow-2xl shadow-black/40">
       <div className="container mx-auto px-6 flex justify-between items-center h-16">
         {/* Left Side: Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/40 transition-shadow duration-300">
+          <div className="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center shadow-lg border border-white/20">
             <span className="text-white font-bold text-sm">W</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
+          <span className="text-xl font-bold text-white">
             WeePull
           </span>
         </Link>
@@ -62,7 +62,7 @@ const Nav = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute top-16 left-0 w-full backdrop-blur-xl bg-black/80 border-b border-white/10 z-40 md:hidden">
+          <div className="absolute top-16 left-0 w-full backdrop-blur-xl bg-black/80 border-b border-white/10 shadow-xl z-40 md:hidden">
             <ul className="flex flex-col items-start space-y-1 px-6 py-4">
               {[
                 { href: "/", label: "Dashboard" },
@@ -105,7 +105,7 @@ const Nav = () => {
                 Upload
               </button>
               {/* Submenu */}
-              <ul className="absolute hidden group-hover:flex flex-col backdrop-blur-xl bg-black/80 border border-white/10 shadow-xl shadow-black/30 mt-4 py-2 w-36 rounded-xl overflow-hidden">
+              <ul className="absolute hidden group-hover:flex flex-col backdrop-blur-xl bg-black/80 border border-white/10 shadow-xl mt-4 py-2 w-36 rounded-xl overflow-hidden">
                 {[
                   { href: "/upload/text", label: "Text" },
                   { href: "/upload/vision", label: "Vision" },
@@ -155,16 +155,16 @@ const Nav = () => {
           {!session ? (
             <Button 
               onClick={() => signIn()} 
-              className="bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white border-0 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300"
+              className="bg-cyan-600 hover:bg-cyan-500 text-white border border-white/10 shadow-lg transition-all duration-300"
             >
               Login
             </Button>
           ) : (
             <div className="relative group">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-emerald-500 text-white flex items-center justify-center rounded-full cursor-pointer shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/40 transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/40">
+              <div className="w-10 h-10 bg-cyan-600 text-white flex items-center justify-center rounded-full cursor-pointer shadow-lg border border-white/20 transition-all duration-300">
                 {session.user?.name?.charAt(0).toUpperCase()}
               </div>
-              <div className="absolute right-0 hidden group-hover:block backdrop-blur-xl bg-black/80 border border-white/10 shadow-xl shadow-black/30 rounded-xl mt-2 overflow-hidden min-w-[120px]">
+              <div className="absolute right-0 hidden group-hover:block backdrop-blur-xl bg-black/80 border border-white/10 shadow-xl rounded-xl mt-2 overflow-hidden min-w-[120px]">
                 <button
                   onClick={() => signOut()}
                   className="block w-full px-4 py-3 text-left text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200"

@@ -50,7 +50,7 @@ export default function PurchasePanel({ post }: Props) {
             setNumDataPoints(result);
             })}} direction="left">
             <DrawerTrigger asChild>
-                <Button className="bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-white/10 px-6 py-5 font-semibold transition-all duration-300 hover:scale-105">
+                <Button className="bg-gradient-to-r from-cyan-600 to-cyan-600 hover:from-blue-500 hover:to-purple-500 rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-white/10 px-6 py-5 font-semibold transition-all duration-300 hover:scale-105">
                     <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
@@ -84,11 +84,11 @@ export default function PurchasePanel({ post }: Props) {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400 text-sm">Type</span>
-                      <span className="px-2 py-1 rounded-md bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 border border-white/10 text-white text-xs">{post.type}</span>
+                      <span className="px-2 py-1 rounded-md bg-gradient-to-r from-cyan-500/20 to-cyan-400/20 border border-white/10 text-white text-xs">{post.type}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400 text-sm">Available</span>
-                      <span className="text-emerald-400 font-semibold">
+                      <span className="text-cyan-300 font-semibold">
                         {numDataPoints ?? (
                           <span className="flex items-center gap-2">
                             <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -120,7 +120,7 @@ export default function PurchasePanel({ post }: Props) {
                 </div>
 
                 {/* Pricing section */}
-                <div className="bg-gradient-to-br from-cyan-500/10 to-emerald-500/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                <div className="bg-gradient-to-br from-cyan-500/10 to-cyan-400/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                     <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -143,7 +143,7 @@ export default function PurchasePanel({ post }: Props) {
                     <div className="border-t border-white/10 pt-3 mt-3">
                       <div className="flex justify-between items-center text-white font-bold text-lg">
                         <span>Total</span>
-                        <span className="font-mono text-emerald-400">${(0.01 * num + 3).toFixed(2)}</span>
+                        <span className="font-mono text-cyan-300">${(0.01 * num + 3).toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
@@ -172,7 +172,7 @@ export default function PurchasePanel({ post }: Props) {
                   className={`w-full py-6 text-base font-semibold ${
                     Number(numDataPoints ?? "0") < 5 
                       ? "bg-gray-600 cursor-not-allowed" 
-                      : "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-500/25"
+                      : "bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 shadow-lg shadow-cyan-400/25"
                   }`}
                   onClick={async () => {
                     if (Number(numDataPoints ?? "0") < 5) {

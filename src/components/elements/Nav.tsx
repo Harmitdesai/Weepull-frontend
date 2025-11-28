@@ -14,17 +14,17 @@ const Nav = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const navLinkStyles = "text-gray-300 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-blue-500 after:to-purple-500 hover:after:w-full after:transition-all after:duration-300";
+  const navLinkStyles = "text-gray-300 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-cyan-500 after:to-emerald-500 hover:after:w-full after:transition-all after:duration-300";
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-black/30 border-b border-white/10 shadow-lg shadow-black/20">
       <div className="container mx-auto px-6 flex justify-between items-center h-16">
         {/* Left Side: Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-shadow duration-300">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/40 transition-shadow duration-300">
             <span className="text-white font-bold text-sm">W</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
             WeePull
           </span>
         </Link>
@@ -155,13 +155,13 @@ const Nav = () => {
           {!session ? (
             <Button 
               onClick={() => signIn()} 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white border-0 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
+              className="bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white border-0 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300"
             >
               Login
             </Button>
           ) : (
             <div className="relative group">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center rounded-full cursor-pointer shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/40">
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-emerald-500 text-white flex items-center justify-center rounded-full cursor-pointer shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/40 transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/40">
                 {session.user?.name?.charAt(0).toUpperCase()}
               </div>
               <div className="absolute right-0 hidden group-hover:block backdrop-blur-xl bg-black/80 border border-white/10 shadow-xl shadow-black/30 rounded-xl mt-2 overflow-hidden min-w-[120px]">

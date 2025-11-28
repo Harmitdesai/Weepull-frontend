@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -80,25 +79,19 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        if (status === 'authenticated'){
-          retrievedPost();
-        }
-    },[status, retrievedPost]);
+        // Load mock data for demo purposes
+        retrievedPost();
+    },[retrievedPost]);
 
     if (status === 'loading') {
       return (
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin"></div>
             <p className="text-gray-400">Loading your dashboard...</p>
           </div>
         </div>
       );
-    }
-    
-    ///////////Redirecting to login for unatuhenticated user/////////
-    if (status === 'unauthenticated') {
-      redirect('/auth/login');
     }
 
   return (

@@ -154,3 +154,78 @@ body {
   border-radius: 1rem;
   color: white;
 }
+
+/* Dynamic Post Card Backgrounds */
+.bg-card-text {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.35), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.25), transparent 45%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: 0.5rem;
+}
+
+.bg-card-image {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.35), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.25), transparent 45%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  border-radius: 0.5rem;
+}
+
+.bg-card-audio {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top left, rgba(251, 146, 60, 0.35), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.25), transparent 45%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(251, 146, 60, 0.15);
+  border-radius: 0.5rem;
+}
+
+.bg-card-text-audio {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.3), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.3), transparent 40%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(153, 167, 154, 0.15);
+  border-radius: 0.5rem;
+}
+
+.bg-card-text-image {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.3), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.3), transparent 40%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(112, 137, 247, 0.15);
+  border-radius: 0.5rem;
+}
+
+.bg-card-image-audio {
+  background: #0f172a;
+  background-image:
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.3), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(251, 146, 60, 0.3), transparent 40%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(210, 115, 153, 0.15);
+  border-radius: 0.5rem;
+}
+
+/* Slow pulse animation for type indicator */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}

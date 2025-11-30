@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -33,6 +32,52 @@ import DashboardPost from "./_components/DashboardPost";
 import { RetrievedPost } from "./_hooks/useDashboardHooks";
 import { useCallback } from "react";
 
+// Mock data for demo mode
+const MOCK_POSTS: Post[] = [
+    {
+        postId: 1,
+        title: "Customer Support Conversations",
+        type: "Text - Text",
+        description: "Collection of customer support chat conversations for training AI chatbots",
+        example: "User: How do I reset my password? Agent: You can reset it by clicking forgot password..."
+    },
+    {
+        postId: 2,
+        title: "Product Review Sentiments",
+        type: "Text - Text",
+        description: "Product reviews with sentiment labels for sentiment analysis models",
+        example: "Review: Great product, works exactly as described! Label: Positive"
+    },
+    {
+        postId: 3,
+        title: "Medical Image Classification",
+        type: "Image - Image",
+        description: "X-ray images with annotations for medical diagnosis AI",
+        example: "Chest X-ray with highlighted regions indicating potential issues"
+    },
+    {
+        postId: 4,
+        title: "Voice Command Dataset",
+        type: "Audio - Audio",
+        description: "Voice recordings with transcriptions for speech recognition",
+        example: "Audio clip: 'Turn on the lights' with timestamp markers"
+    },
+    {
+        postId: 5,
+        title: "Image Caption Dataset",
+        type: "Text - Image",
+        description: "Images paired with descriptive captions for image captioning models",
+        example: "Image of sunset with caption: A beautiful orange sunset over the ocean"
+    },
+    {
+        postId: 6,
+        title: "Podcast Transcription",
+        type: "Text - Audio",
+        description: "Audio podcast episodes with accurate text transcriptions",
+        example: "Audio segment paired with verbatim transcription text"
+    }
+];
+
 const Dashboard = () => {
 
     const { data: session, status } = useSession();
@@ -41,50 +86,59 @@ const Dashboard = () => {
     const [type, setType] = useState("Text - Text");
 
     const retrievedPost = useCallback(async () => {
+        // Demo mode: use mock data
+        if (!session?.user?.email || session.user.email === 'demo@weepull.com') {
+            setPosts(MOCK_POSTS);
+            return;
+        }
 
-        const email = session?.user?.email;
-        const url = "http://localhost:8080/dataFetch/userpost";
-        const response = await fetch(url, {
-          method : 'POST',
-          headers : {
-              'Content-Type' : 'application/json',
-          },
-          body : JSON.stringify({email: email})
-        });
-        const parsedResponse = await response.json();
-        const data = parsedResponse.data;
-    
-        const postList: Post[] = data.map((post: RetrievedPost) => ({
-          title: post.title,
-          type: post.type,
-          description: post.description,
-          postId: post.postid,
-          example: post.example,
-        }));
-    
-        setPosts(postList);
-        console.log(postList);
+        try {
+            const email = session?.user?.email;
+            const url = "http://localhost:8080/dataFetch/userpost";
+            const response = await fetch(url, {
+              method : 'POST',
+              headers : {
+                  'Content-Type' : 'application/json',
+              },
+              body : JSON.stringify({email: email})
+            });
+            const parsedResponse = await response.json();
+            const data = parsedResponse.data;
+        
+            const postList: Post[] = data.map((post: RetrievedPost) => ({
+              title: post.title,
+              type: post.type,
+              description: post.description,
+              postId: post.postid,
+              example: post.example,
+            }));
+        
+            setPosts(postList);
+            console.log(postList);
+        } catch {
+            // Fallback to mock data if backend is unavailable
+            setPosts(MOCK_POSTS);
+        }
     }, [session]);
 
     useEffect(() => {
         if (status === 'authenticated'){
           retrievedPost();
         }
+        // Demo mode: show mock posts when unauthenticated
+        if (status === 'unauthenticated') {
+            setPosts(MOCK_POSTS);
+        }
     },[status, retrievedPost]);
 
     if (status === 'loading') {
       return <p className="text-white">Loading...</p>;
     }
-    
-    ///////////Redirecting to login for unatuhenticated user/////////
-    if (status === 'unauthenticated') {
-      redirect('/auth/login');
-    }
 
   return (
     <div>
          <div className="mt-5 p-5 h-full">
-            <div className="grid grid-cols-5 gap-4 h-[500px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 h-[500px]">
             {posts.map((post) => (
                 <DashboardPost key={post.postId} post={post}>
                 </DashboardPost>

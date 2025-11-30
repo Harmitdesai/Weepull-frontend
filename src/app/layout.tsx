@@ -1,5 +1,6 @@
 "use client";
 
+// import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Nav from "@/components/elements/Nav";
@@ -14,7 +15,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     <html lang="en"
       style={{ ['--nav-height' as string]: '4rem' }}
     >
-      <body className="font-sans antialiased flex flex-col min-h-screen">
+      <body className="antialiased flex flex-col min-h-screen font-sans" >
         <SessionProvider>
           {!shouldHideNav && <Nav />}
           <main className="flex-1 relative z-10">{children}</main>

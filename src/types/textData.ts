@@ -70,10 +70,10 @@ export interface BaseTextData {
     | FreeText;
 
    export type Post = {
-    postId: number;
+    post_id: number;
     title: string;
     description: string;
     example: string;
-    type: "Text - Text" | "Image - Image" | "Audio - Audio" | "Text - Audio" | "Text - Image" | "Image - Audio";
+    type: "text_text" | "image_image" | "audio_audio" | "text_audio" | "text_image" | "image_audio";
   };
   

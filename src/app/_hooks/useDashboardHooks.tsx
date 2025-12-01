@@ -10,7 +10,7 @@ export interface RetrievedPost {
     title: string;
     type: string;
     description: string;
-    postid: string;
+    post_id: string;
     example: string;
 }
 
@@ -36,7 +36,7 @@ const retrievedPost = async (email : string) : Promise<Post[]> => {
           title: post.title,
           type: post.type,
           description: post.description,
-          postId: post.postid,
+          post_id: post.post_id,
           example: post.example,
         }));
     

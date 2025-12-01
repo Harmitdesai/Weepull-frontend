@@ -32,7 +32,7 @@ export default function PurchasePanel({ post }: Props) {
     const [fetchPurchaseLink , setFetchPurchaseLink] = useState(false); // to fetch the purchase link from backend
     const [numDataPoints, setNumDataPoints] = useState<string | null>(null); // to store the number of data points available for purchase
 
-    const getAvailableDatapoints = async (postId: number) => {
+    const getAvailableDatapoints = async (post_id: number) => {
         const url = `${API_URL}/dataFetch/getAvailableDatapoints`;
         const response = await fetch(url, 
             {
@@ -40,7 +40,7 @@ export default function PurchasePanel({ post }: Props) {
                 headers : {
                     'Content-Type' : 'application/json',
                 },
-                body : JSON.stringify({postId: postId})
+                body : JSON.stringify({post_id: post_id})
             }
         );
         const parsedResponse = await response.json();
@@ -48,7 +48,7 @@ export default function PurchasePanel({ post }: Props) {
         return parsedResponse.data;
     }
 
-    const getCheckoutLink = async (postId: number, totalDataPoints: number) => {
+    const getCheckoutLink = async (post_id: number, totalDataPoints: number) => {
         const email = session?.user?.email;
         const url = `${API_URL}/payment/getCheckoutLink`;
         const response = await fetch(url, 
@@ -57,7 +57,7 @@ export default function PurchasePanel({ post }: Props) {
                 headers : {
                     'Content-Type' : 'application/json',
                 },
-                body : JSON.stringify({postId: postId, totalDataPoints: totalDataPoints, email: email, postTitle: post.title})
+                body : JSON.stringify({post_id: post_id, totalDataPoints: totalDataPoints, email: email, postTitle: post.title})
             }
         );
         console.log(response);
@@ -67,7 +67,7 @@ export default function PurchasePanel({ post }: Props) {
 
     return (
         <Drawer onOpenChange={()=>{
-            getAvailableDatapoints(post.postId).then(result => {
+            getAvailableDatapoints(post.post_id).then(result => {
             setNumDataPoints(result);
             })}} direction="left">
             <DrawerTrigger asChild>
@@ -147,7 +147,7 @@ export default function PurchasePanel({ post }: Props) {
                     }
                     setFetchPurchaseLink(!fetchPurchaseLink)
                     if (num > 0 && num <= Number(numDataPoints)) {
-                      await getCheckoutLink(post.postId, num).then(result => {
+                      await getCheckoutLink(post.post_id, num).then(result => {
                           console.log(result);
                           window.location.href = result;
                       })

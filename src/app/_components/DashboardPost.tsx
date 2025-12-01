@@ -28,7 +28,7 @@ type Props = {
 export default function DashboardPost({ post }: Props) {
 
   return (
-        <Dialog key={post.postId}>
+        <Dialog key={post.post_id}>
             <DialogTrigger asChild>
                 <Card className="h-[250px] bg-fancy relative transform transition-transform duration-300 will-change-transform hover:scale-105 hover:z-10">
                     <CardHeader>

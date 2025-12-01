@@ -58,7 +58,7 @@ const Dashboard = () => {
           title: post.title,
           type: post.type,
           description: post.description,
-          postId: post.postid,
+          post_id: post.post_id,
           example: post.example,
         }));
     
@@ -86,7 +86,7 @@ const Dashboard = () => {
          <div className="mt-5 p-5 h-full">
             <div className="grid grid-cols-5 gap-4 h-[500px]">
             {posts.map((post) => (
-                <DashboardPost key={post.postId} post={post}>
+                <DashboardPost key={post.post_id} post={post}>
                 </DashboardPost>
             ))}
             </div>

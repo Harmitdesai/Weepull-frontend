@@ -55,7 +55,7 @@ const DataRequests = () => {
           title: post.title,
           type: post.type,
           description: post.description,
-          postId: post.postid,
+          post_id: post.post_id,
           example: post.example,
         }));
     
@@ -109,8 +109,8 @@ const DataRequests = () => {
                     <DialogFooter>
                         <Button className="bg-blue-600 hover:bg-blue-500 transform transition-transform duration-300 will-change-transform hover:scale-105 rounded-xl shadow-md border-t-[1px] border-white/30 p-6" 
                         onClick={() => {
-                            if (post.type === "Text - Text"){
-                            redirect('/upload/text?postId=' + post.postId)
+                            if (post.type === "text_text"){
+                            redirect('/upload/text?postId=' + post.post_id)
                             } else {
                                 alert("This type of post is not supported yet");
                             }

@@ -106,7 +106,7 @@ const Nav = () => {
             Upload
           </button>
           {/* Submenu */}
-          <ul className="absolute hidden group-hover:flex flex-col bg-white shadow-lg mt-2 py-2 w-32">
+          <ul className="absolute hidden group-hover:flex flex-col bg-white shadow-lg top-full py-2 w-32">
             <li>
               <Link
                 href="/upload/text"
@@ -170,15 +170,12 @@ const Nav = () => {
               Login
             </Button>
           ) : (
-            <div className="relative group">
+            <div className="group relative">
               <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full cursor-pointer">
                 {session.user?.name?.charAt(0).toUpperCase()}
               </div>
-              <div className="absolute right-0 hidden group-hover:block bg-white border shadow-md rounded-md mt-2">
-                <button
-                  onClick={() => signOut()}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
+              <div className="absolute right-0 top-full hidden group-hover:block bg-white border shadow-md rounded-md">
+                <button onClick={() => signOut()} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                   Logout
                 </button>
               </div>

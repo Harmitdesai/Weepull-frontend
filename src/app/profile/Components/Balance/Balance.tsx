@@ -19,7 +19,7 @@ export default function Balance({ email, classname }: BalanceProps) {
 
         const fetchBalance = async () => {
             try {
-            const url = "http://localhost:8080/dataFetch/balance";
+            const url = "/api/dataFetch/balance";
             const res = await fetch(url, {
                 method: 'POST',
                 headers: {

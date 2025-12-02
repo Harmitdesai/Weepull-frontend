@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 import {Post} from "@/types/textData";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
-
 export interface RetrievedPost {
     title: string;
     type: string;
@@ -21,7 +19,7 @@ const retrievedPost = async (email : string) : Promise<Post[]> => {
             return [];
         };
 
-        const url = `${API_URL}/dataFetch/userpost`;
+        const url = `/api/dataFetch/userpost`;
         const response = await fetch(url, {
           method : 'POST',
           headers : {

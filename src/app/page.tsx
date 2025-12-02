@@ -28,49 +28,15 @@ import {
     SelectValue,
   } from "@/components/ui/select";
 
-import {Post} from "@/types/textData";
 import DashboardPost from "./_components/DashboardPost";
-import { RetrievedPost } from "./_hooks/useDashboardHooks";
-import { useCallback } from "react";
+import { useDashboardHooks } from "./_hooks/useDashboardHooks";
 
 const Dashboard = () => {
 
     const { data: session, status } = useSession();
-    const [posts, setPosts] = useState<Post[]>([]);
-    ///////////Variable for storing type of the post being added/////////
     const [type, setType] = useState("Text - Text");
-
-    const retrievedPost = useCallback(async () => {
-
-        const email = session?.user?.email;
-        const url = "http://localhost:8080/dataFetch/userpost";
-        const response = await fetch(url, {
-          method : 'POST',
-          headers : {
-              'Content-Type' : 'application/json',
-          },
-          body : JSON.stringify({email: email})
-        });
-        const parsedResponse = await response.json();
-        const data = parsedResponse.data;
     
-        const postList: Post[] = data.map((post: RetrievedPost) => ({
-          title: post.title,
-          type: post.type,
-          description: post.description,
-          post_id: post.post_id,
-          example: post.example,
-        }));
-    
-        setPosts(postList);
-        console.log(postList);
-    }, [session]);
-
-    useEffect(() => {
-        if (status === 'authenticated'){
-          retrievedPost();
-        }
-    },[status, retrievedPost]);
+    const { posts } = useDashboardHooks(session?.user?.email || undefined);
 
     if (status === 'loading') {
       return <p className="text-white">Loading...</p>;
@@ -144,19 +110,19 @@ const Dashboard = () => {
                     <Label htmlFor="type" className="text-right">
                     Type
                     </Label>
-                    <Select onValueChange={(value) => setType(value)} defaultValue="Text - Text">
+                    <Select onValueChange={(value) => setType(value)} defaultValue="text_text">
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Select a Type" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
                             <SelectLabel>Type of Data</SelectLabel>
-                            <SelectItem value="Text - Text">Text - Text</SelectItem>
-                            <SelectItem value="Image - Image">Image - Image</SelectItem>
-                            <SelectItem value="Audio - Audio">Audio - Audio</SelectItem>
-                            <SelectItem value="Text - Audio">Text - Audio</SelectItem>
-                            <SelectItem value="Text - Image">Text - Image</SelectItem>
-                            <SelectItem value="Image - Audio">Image - Audio</SelectItem>
+                            <SelectItem value="text_text">Text - Text</SelectItem>
+                            <SelectItem value="image_image">Image - Image</SelectItem>
+                            <SelectItem value="audio_audio">Audio - Audio</SelectItem>
+                            <SelectItem value="text_audio">Text - Audio</SelectItem>
+                            <SelectItem value="text_image">Text - Image</SelectItem>
+                            <SelectItem value="image_audio">Image - Audio</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -179,7 +145,7 @@ const Dashboard = () => {
                             email: session?.user?.email,
                         }
                         
-                        const url = "http://localhost:8080/dataUpload/post";
+                        const url = "/api/dataUpload/post";
                         const response = await fetch(url, {
                             method : 'POST',
                             headers : {

@@ -22,8 +22,6 @@ type Props = {
   post: Post;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
-
 export default function PurchasePanel({ post }: Props) {
 
     const { data: session } = useSession();
@@ -33,7 +31,7 @@ export default function PurchasePanel({ post }: Props) {
     const [numDataPoints, setNumDataPoints] = useState<string | null>(null); // to store the number of data points available for purchase
 
     const getAvailableDatapoints = async (post_id: number) => {
-        const url = `${API_URL}/dataFetch/getAvailableDatapoints`;
+        const url = `/api/dataFetch/getAvailableDatapoints`;
         const response = await fetch(url, 
             {
                 method : 'POST',
@@ -50,7 +48,7 @@ export default function PurchasePanel({ post }: Props) {
 
     const getCheckoutLink = async (post_id: number, totalDataPoints: number) => {
         const email = session?.user?.email;
-        const url = `${API_URL}/payment/getCheckoutLink`;
+        const url = `/api/payment/getCheckoutLink`;
         const response = await fetch(url, 
             {
                 method : 'POST',

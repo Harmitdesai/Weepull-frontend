@@ -14,7 +14,7 @@ export interface OrderProps {
 export default function Order({ order_id, post_title, order_date, num_datapoints, order_time, classname, onDelete }: OrderProps) {
 
   const handleDeleteOrder = async (orderId: string) => {
-    const url = "http://localhost:8080/payment/deleteOrder";
+    const url = "/api/payment/deleteOrder";
     try {
     const res = await fetch(url, {
       method: 'DELETE',
@@ -40,7 +40,7 @@ export default function Order({ order_id, post_title, order_date, num_datapoints
 };
 
 const downloadZip = async () => {
-  const response = await fetch('http://localhost:8080/dataFetch/download', {
+  const response = await fetch('/api/dataFetch/download', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

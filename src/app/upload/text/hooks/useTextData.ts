@@ -146,7 +146,7 @@ export function useTextData() {
   // API helpers (these return parsed JSON or throw on network error)
   const checkOnBoarded = async (email?: string) => {
     if (!email) return null;
-    const res = await fetch(`${API_URL}/users/checkOnBoarded`, {
+    const res = await fetch(`/api/users/checkOnBoarded`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -160,7 +160,7 @@ export function useTextData() {
     if (!email) throw new Error("Missing email for generateLink");
     setFetchLink(true);
     try {
-      const res = await fetch(`${API_URL}/payment/onboardSeller`, {
+      const res = await fetch(`/api/payment/onboardSeller`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -172,8 +172,8 @@ export function useTextData() {
     }
   };
 
-  const submitData = async (email?: string, postId?: string) => {
-    const url = `${API_URL}/dataUpload/text?postId=${postId ?? "-1"}`;
+  const submitData = async (email?: string, post_id?: string) => {
+    const url = `/api/dataUpload/text?post_id=${post_id ?? "-1"}`;
 
     // Convert Sets to arrays for JSON serialization for sentiment type
     // eslint-disable-next-line

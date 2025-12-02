@@ -46,7 +46,7 @@ const DataRequests = () => {
     const [type, setType] = useState("Text - Text");
 
     const retrievedPost = async () => {
-        const url = "http://localhost:8080/dataFetch/post";
+        const url = "/api/dataFetch/post";
         const response = await fetch(url);
         const parsedResponse = await response.json();
         const data = parsedResponse.data;
@@ -175,19 +175,19 @@ const DataRequests = () => {
                     <Label htmlFor="type" className="text-right">
                     Type
                     </Label>
-                    <Select onValueChange={(value) => setType(value)} defaultValue="Text - Text">
+                    <Select onValueChange={(value) => setType(value)} defaultValue="text_text">
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Select a Type" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
                             <SelectLabel>Type of Data</SelectLabel>
-                            <SelectItem value="Text - Text">Text - Text</SelectItem>
-                            <SelectItem value="Image - Image">Image - Image</SelectItem>
-                            <SelectItem value="Audio - Audio">Audio - Audio</SelectItem>
-                            <SelectItem value="Text - Audio">Text - Audio</SelectItem>
-                            <SelectItem value="Text - Image">Text - Image</SelectItem>
-                            <SelectItem value="Image - Audio">Image - Audio</SelectItem>
+                            <SelectItem value="text_text">Text - Text</SelectItem>
+                            <SelectItem value="image_image">Image - Image</SelectItem>
+                            <SelectItem value="audio_audio">Audio - Audio</SelectItem>
+                            <SelectItem value="text_audio">Text - Audio</SelectItem>
+                            <SelectItem value="text_image">Text - Image</SelectItem>
+                            <SelectItem value="image_audio">Image - Audio</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -210,7 +210,7 @@ const DataRequests = () => {
                             email: session?.user?.email,
                         }
                         
-                        const url = "http://localhost:8080/dataUpload/post";
+                        const url = "/api/dataUpload/post";
                         const response = await fetch(url, {
                             method : 'POST',
                             headers : {

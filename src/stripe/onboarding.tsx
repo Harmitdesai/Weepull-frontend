@@ -8,8 +8,6 @@ export function useOnboarding() {
     const [fetchLink, setFetchLink] = useState<boolean>(false); // to show loading state when generating link or checking onboarded status
     const [link, setLink] = useState<string | null>(null); // to store the generated onboarding link
 
-    const checkOnBoardedLink = `http://localhost:8080/payment/checkOnBoarded`;
-
     const handleOnboard = useCallback(async (email?: string) => {
     if (!email) {
         alert("Missing email for onboarding to Stripe");
@@ -17,7 +15,7 @@ export function useOnboarding() {
     }
     if (onBoarded === null) {
         setFetchLink(true);
-        const res = await fetch(checkOnBoardedLink, {
+        const res = await fetch("/api/payment/checkOnBoarded", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
@@ -32,7 +30,7 @@ export function useOnboarding() {
             setFetchLink(false);
         }
     }
-}, [onBoarded, checkOnBoardedLink]);
+}, [onBoarded]);
 
     return { handleOnboard, onBoarded, fetchLink, link };
 }

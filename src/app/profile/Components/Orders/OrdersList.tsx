@@ -16,7 +16,7 @@ export default function OrdersList({ email, classname }: OrderListProps) {
 
         const fetchOrders = async () => {
             try {
-            const url = "http://localhost:8080/payment/orders";
+            const url = "/api/payment/orders";
             const res = await fetch(url, {
                 method: 'POST',
                 headers: {

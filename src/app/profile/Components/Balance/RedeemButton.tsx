@@ -17,7 +17,7 @@ export default function RedeemButton({email, balance, classname}: RedeemButtonPr
             return;
         }
 
-        const url = "http://localhost:8080/payment/redeem";
+        const url = "/api/payment/redeem";
         const res = await fetch(url, {
             method: 'POST',
             headers: {
